@@ -5,8 +5,8 @@ const SelectOption = ({filter, title}) => {
   const {setChoose} = useStateContext('');
 
   return (
-    <select onChange={(e)=>setChoose(e.target.value)}>
-        <option disabled selected>{title}</option>
+    <select defaultValue={title} onChange={(e)=>setChoose(e.target.value)}>
+        <option disabled>{title}</option>
         {filter?.map((item)=><option value={item} key={item} >{item}</option>) }
     </select>
   )

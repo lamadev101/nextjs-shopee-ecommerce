@@ -39,14 +39,14 @@ const ProductDetails = () => {
             )}
           </div>
           <div className="mainImage">
-            <Image src = {image ? image : product[0].img} objectFit="cover" layout='responsive' alt="" />
+            <Image src = {image ? image : product[0]?.img} objectFit="cover" layout='responsive' alt="" />
           </div>
         </div>
 
         <div className="right">
-          <h2>{product[0].name}</h2>
+          <h2>{product[0]?.name}</h2>
             <Rating/>
-          <h2>$ {product[0].price}</h2>
+          <h2>$ {product[0]?.price}</h2>
           <div className='sizeQty'>
             <FilterBox option="show"/>
             <span>Quantity: <small>{qty} item(s) add to cart</small></span>
