@@ -8,7 +8,7 @@ const Announcement = () => {
   return (
     <div className='announcement'>
         <div className="wrapper">
-            <h4>Super Deal ! Free shipping on orders over $50 </h4>
+            <h4 className='msg'>Super Deal ! Free shipping on orders over $50 </h4>
             <ul>
                 <li>Lng:Eng</li>
                 <li>Customer Care</li>

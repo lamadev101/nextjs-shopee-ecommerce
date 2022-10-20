@@ -4,16 +4,18 @@ import item from '../public/img/products/f1.jpg'
 import {AiOutlineCloseCircle, AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai'
 import { Rating } from '../components'
 import { useStateContext } from '../context/StateContext'
+import { BsCart4 } from 'react-icons/bs'
+import Link from 'next/link'
 
 const Cart = () => {
-  const {arr, qty, setQty, totalPrice, setTotalPrice} = useStateContext();
+  const {qty, setQty, totalPrice, setTotalPrice} = useStateContext();
   setTotalPrice(qty*89.00);
   
   return (
     <div className='cart exp'>
-      <div className="wrapper">
+      {qty >= 1 ? <div className="wrapper">
         <div className="cartItems">
-          {arr.map((idx)=><div className="cartItem" key={idx}>
+          <div className="cartItem">
             <div className="image">
               <Image src={item} alt="" />
             </div>
@@ -33,7 +35,7 @@ const Cart = () => {
               <h3>Cost: $ {89.00 * qty}</h3>
             </div>
             <AiOutlineCloseCircle className='icon'/>
-          </div>)}
+          </div>
         </div>
         <div className="checkOut">
           <h3>Chekout Section</h3>
@@ -52,7 +54,14 @@ const Cart = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div>: 
+      <div className='emptyCart'>
+        <BsCart4 className='icon'/>
+        <h1>Your cart is Empty</h1>
+        <Link href="/shop">
+          <button className='btn'>Visit Shop</button>
+        </Link>
+      </div>}
     </div>
   )
 }

@@ -20,12 +20,10 @@ const ProductDetails = () => {
   
   const addItems = ()=> setQty(prev=>prev+1);
   const addCartItems = ()=> {
-    // setCartItems([{id: product[0].id, name: product.name, color: product.color, quantity: 1, img: product.img, size: "xl"}]);
     setCartItems([...cartItems, clickedItem]);
     setQty(next=>next+1);
-    // console.log(cartItems);
   } 
-  const cartItem = cartItems?.filter((item) => item === clickedItem);
+  // const cartItem = cartItems?.filter((item) => item === clickedItem);
 
   return (
     <div className='productDetail exp'>
@@ -44,6 +42,7 @@ const ProductDetails = () => {
             <Image src = {image ? image : product[0].img} objectFit="cover" layout='responsive' alt="" />
           </div>
         </div>
+
         <div className="right">
           <h2>{product[0].name}</h2>
             <Rating/>
@@ -54,13 +53,13 @@ const ProductDetails = () => {
           </div>
           <p className='productStatus'>In Stock</p>
           <div className="cartBtn">
-            {clickedItem === cartItem ? (
-              <>
+            {qty >= 1 ? (
+              <div className='twoBtn'>
                 <button className="btn addMore" onClick={addItems}>Add More</button>
                 <Link href="/cart">
                   <button className='btn checkoutNow'>Checkout Now</button>
                 </Link>
-              </>
+              </div>
             ):(
               <button className="btn addCart" onClick={addCartItems}>Add to Cart</button>
             )}

@@ -11,8 +11,8 @@ const Blog = () => {
         <p>Read all case studies about our products!</p>
       </div>
       <div className="wrapper exp">
-        {blogs.map(blog=>(
-          <div className="pageCard">
+        {blogs.map((blog, idx)=>(
+          <div className="pageCard" key={idx}>
             <div className="image">
               <Image src={blog.img} className="img" alt=""/>
             </div>

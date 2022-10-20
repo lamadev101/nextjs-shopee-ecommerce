@@ -68,6 +68,9 @@ input:focus{
     justify-content: flex-end;
     gap: 4rem;
     padding: 5px;
+    .msg{
+      color: crimson;
+    }
     ul{
       margin: 0;
       padding: 0;
@@ -874,21 +877,261 @@ h1, p{
       }
     }
   }
+  .emptyCart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #777;
+    .icon{
+      font-size: 200px;
+    }
+    button{
+      background: gold;
+      border: none;
+      color: white;
+      margin-top: 10px;
+    }
+  }
 }
 // *********Mobile Responsive**************
 @media(max-width:799px){
    .navbar{
     position: relative;
-    flex-direction: column;
-    padding: 0;
+    gap: 20px;
+    padding-left: 20px;
     .navItems{
       display: none;
-    }
-    
+    }    
    } 
+   .featured{
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    gap: 5px;
+    .card{
+      width: 30%;
+    }
+   }
+   .hero{
+    height: 50vh;
+    .left{
+      flex: 2;
+    }
+    .right{
+      flex: 1;
+      padding: cob0px;
+    }
+   }
+   .form{
+    .container{
+      width: 80%;
+
+    }
+   }
+   .product{
+    .wrapper{
+      flex-wrap: wrap;
+    }
+   }
+   .card{
+    width: 45%;
+   }
+   .notice{
+    height: 20vh;
+   }
+   .banner{
+    .bottom{
+      flex-direction: column;
+      .left, .right, .middle{
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-bottom: 20px;
+      }
+    }
+   }
+
+   .footer{
+    .middle{
+      flex-direction: column;
+    }
+   }
+
+   .cart{
+    font-size: 12px;
+    .cartItems{
+      .cartItem{
+        padding: 5px;
+      }
+    }
+   }
 }
 
-
 @media(max-width:477px){
+  select{
+    padding: 5px;
+    option{
+      font-weight: 300;
+      font-size: 12px;
+    }
+  }
+  .announcement{
+    padding: 0;
+    font-size: 12px;
+    font-weight: 200;
+    background: rgb(188, 222, 192);
 
+    .wrapper{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    
+  }
+  .navbar{
+    padding-bottom: 10px;
+    flex-direction: column;
+    gap:0px;
+    .search{
+      width: 100%;
+      padding: 0 20px;
+      margin-top: 0;
+      input{
+        width: 95%;
+      }
+    }
+  }
+  .form{
+    z-index: 9999;
+    .container{
+      width: 100%;
+      form{
+        padding: 5px;
+        flex-direction: column;
+        .formInput{
+          width: 100%;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .hero{
+    height: 50vh;
+    align-items: center;
+    .left{
+      text-align: center;
+    }
+    .right{
+      display: none;
+    }
+  }
+  .featured{
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .card{
+      width: 45%;
+    }
+  }
+  .products{
+    .wrapper{
+      flex-direction: column;
+    }
+  }
+  .card{
+    width: 100%;
+  }
+  .banner{
+    h1{
+      font-size: 16px;
+    }
+    p{
+      font-size: 12px;
+    }
+    .tag{
+      font-weight: 400;
+    }
+    .top, .bottom{
+      flex-direction: column;
+      gap: 5px;
+    }
+    .left, .right, .middle{
+      padding-top: 1rem;
+    }
+    button{
+      width: 100px;
+      font-weight: 400;
+      border: .5px solid white;
+      margin-bottom: 20px;
+    }
+  }
+  .newsLetter{
+    flex-direction: column;
+    padding-top: 10px;
+    p{
+      font-size: 12px;
+    }
+    .right{
+      input, button{
+        font-size: 12px;
+        height: 30px;
+      }
+    }
+  }
+  .footer{
+    flex-direction: column;
+    align-items: center;
+
+    .middle{
+      flex-direction: row;
+      li{
+        font-size: 12px;
+      }
+    }
+  }
+
+  .productDetail{
+    .top{
+      flex-direction: column;
+      .right{
+        .cartBtn{
+          .twoBtn{
+            display: flex;
+            gap: 5px;
+            button{
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .cart{
+    .wrapper{
+      flex-direction: column;
+      font-size: 12px;
+
+      .checkOut{
+        .container{
+          li{
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .blog{
+    .wrapper{
+      margin: 0;
+      .pageCard{
+        flex-direction: column;
+        height: auto;
+      }
+    }
+  }
 }
