@@ -6,24 +6,33 @@ import tshirt3 from '../../public/img/products/f3.jpg'
 import tshirt4 from '../../public/img/products/f4.jpg'
 
 import {FilterBox, Products, Rating} from '../../components';
-import { featuredProducts, newArraivalProducts } from '../api/data';
+import { featuredProducts } from '../api/data';
 import Link from 'next/link';
 import { useStateContext } from '../../context/StateContext'
+import { useRouter } from 'next/router'
 
 const ProductDetails = () => {
-  const {qty, setQty, clickedItem, setCartItems, cartItems} = useStateContext();
+  const router = useRouter();
+  const data = router.query;
+
+  const {qty, setQty, dispatch, state: {cart}} = useStateContext();
   const [image, setImage] = useState(null);
 
-  const combineProducts =  featuredProducts.concat(newArraivalProducts);
-  console.log(combineProducts);
-  const product = combineProducts.filter(product => product.id === clickedItem);
-  
-  const addItems = ()=> setQty(prev=>prev+1);
-  const addCartItems = ()=> {
-    setCartItems([...cartItems, clickedItem]);
-    setQty(next=>next+1);
+  console.log(image);
+
+  const addToCart = ()=> {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: {
+        id: data.id,
+        name: data.name,
+        qty: 1,
+        img: data.img,
+        price: data.price
+      }
+    })
+    setQty(prev=>prev+1);
   } 
-  // const cartItem = cartItems?.filter((item) => item === clickedItem);
 
   return (
     <div className='productDetail exp'>
@@ -32,36 +41,40 @@ const ProductDetails = () => {
         <div className="left">
           <div className="cardImage">
             {[tshirt1, tshirt2, tshirt3, tshirt4].map((tshirt, id)=>(
-              <div className='imageBox' key={id} onMouseOver={()=>setImage(tshirt)}>
+              <div className='imageBox' key={id} onMouseOver={()=>setImage(tshirt.src)}>
                 <Image src={tshirt} alt=""/>
               </div>
             )
             )}
           </div>
           <div className="mainImage">
-            <Image src = {image ? image : product[0]?.img} objectFit="cover" layout='responsive' alt="" />
+            <img src = {image ? image : data.img} alt="" />
           </div>
         </div>
 
         <div className="right">
-          <h2>{product[0]?.name}</h2>
+          <h2>{data.name}</h2>
             <Rating/>
-          <h2>$ {product[0]?.price}</h2>
+          <h2>$ {data.price}</h2>
           <div className='sizeQty'>
             <FilterBox option="show"/>
             <span>Quantity: <small>{qty} item(s) add to cart</small></span>
           </div>
           <p className='productStatus'>In Stock</p>
           <div className="cartBtn">
-            {qty >= 1 ? (
+            {cart.some(p=>p.id === data.id) ? (
               <div className='twoBtn'>
-                <button className="btn addMore" onClick={addItems}>Add More</button>
-                <Link href="/cart">
-                  <button className='btn checkoutNow'>Checkout Now</button>
-                </Link>
+                <button className="btn addMore" onClick={()=>{
+                  dispatch({
+                    type: 'REMOVE_FROM_CART',
+                    payload: data.id
+                  })
+                  setQty(prev=>prev - 1)
+                }}>Remove from Cart</button>
+                
               </div>
             ):(
-              <button className="btn addCart" onClick={addCartItems}>Add to Cart</button>
+              <button className="btn addCart" onClick={addToCart}>Add to Cart</button>
             )}
           </div>
           <h1>Product Details</h1>

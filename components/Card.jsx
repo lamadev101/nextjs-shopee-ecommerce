@@ -1,22 +1,48 @@
 import Image from 'next/image'
 import Link from 'next/link';
 import { BsCart4} from 'react-icons/bs'
+import {MdOutlineRemoveShoppingCart} from 'react-icons/md'
 import { useStateContext } from '../context/StateContext';
 import Rating from './Rating';
 
 const Card = ({product}) => {
-  const {setQty, clickedItem, setClickedItem, setActiveId} = useStateContext();
+  const {setQty, dispatch, state: {cart}} = useStateContext();
 
-  const handleClicked = () =>{ 
-    setClickedItem(product.id);
-    setActiveId(null);
-    // console.log("Product Id: ", product.id);
-    // console.log(clickedItem);
+  const addToCart = ()=>{
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: {
+        id: product.id,
+        img: product.img,
+        price: product.price,
+        name: product.name,
+        qty: 1
+      }
+    })
+    setQty(prev=>prev+1);
   }
+
+
+  const removeFromCart = ()=>{
+    dispatch({
+      type: 'REMOVE_FROM_CART',
+      payload: product
+    })
+    setQty(prev=>prev-1)
+  }
+
   
   return (
-    <div className='card' onClick={handleClicked}>
-        <Link href={`/product/${product.id}`}>
+    <div className='card'>
+        <Link href={{
+          pathname: `/product/${product.id}`,
+          query: {
+            id: product.id,
+            img: product.img.src,
+            name: product.name,
+            price: product.price
+          }
+        }}>
         <div className="image">
           <Image src={product.img} layout="responsive" alt='' />
         </div>
@@ -27,7 +53,9 @@ const Card = ({product}) => {
           <Rating/>
           <div className='priceCart'>
             <span className='price'>$ {product.price}</span>
-            <span className='cart'><BsCart4 onClick={()=>setQty(prev=>prev+1)} /></span>
+            <span className='cart'>
+              {cart.some(p=>p.id === product.id) ? <MdOutlineRemoveShoppingCart className='removeIcon' onClick={removeFromCart}/>:<BsCart4 onClick={addToCart} className="addIcon" />}
+            </span>
           </div>
         </div>
       </div>
